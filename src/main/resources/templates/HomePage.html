@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"/>
+    <script src="jquery.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="jquery-ui.css"/>
+    <style>
+        .w3-theme {color:#fff !important;background-color:#4CAF50 !important}
+        .w3-btn {background-color:#4CAF50;margin-bottom:4px}
+        .w3-code{border-left:4px solid #4CAF50}
+        .myMenu {margin-bottom:150px}
+    </style>
+    <script>
+  $(function() {
+    $( "#fromDate" ).datepicker({
+        dateFormat: "dd-mm-yy",
+        onSelect: function(dateText, inst){
+     $("#tillDate").datepicker("option","minDate",
+     $("#fromDate").datepicker("getDate"));
+  }
+    });
+
+    $( "#tillDate" ).datepicker({
+        dateFormat: "dd-mm-yy",
+        minDate: $("#fromDate").datepicker("getDate")
+    });
+  });
+
+    </script>
+</head>
+<body style="background-color: rgb(179, 204, 204);">
+<!-- Top -->
+<div>
+    <div class="w3-top" style="position: relative;">
+        <div class="w3-row w3-white w3-padding">
+            <div class="w3-half w3-margin-top w3-wide w3-hide-medium w3-hide-small">JIRA DashBoard
+            </div>
+        </div>
+        <ul class="w3-navbar w3-theme w3-large" style="z-index: 4;">
+            <li class="w3-opennav w3-left w3-hide-large"><span class="w3-hover-white w3-large w3-theme w3-padding-16">�&#732;�</span>
+            </li>
+            <li style="height: 52px;" class="w3-hide-medium w3-hide-small"><a class="w3-hover-white w3-padding-16"
+                                                                              href=""
+                                                                              onclick="w3_show_nav('menuTut')">Setup</a></li>
+            <li class="w3-hide-medium w3-hide-small"><a class="w3-hover-white w3-padding-16"
+                                                        href="http://localhost:8080/commits"
+                                                        onclick="w3_show_nav('menuRef')">COMMITS</a></li>
+            <li class="w3-hide-medium w3-hide-small"><a class="w3-hover-white w3-padding-16"
+                                                        href="http://localhost:8080/authors"
+                                                        onclick="w3_show_nav('menuRef')">AUTHORS</a></li>
+            <li class="w3-hide-medium w3-hide-small"><a class="w3-hover-white w3-padding-16"
+                                                        href="http://localhost:8080/branchlist"
+                                                        onclick="w3_show_nav('menuRef')">BRANCH LIST</a></li>
+            <li class="w3-hide-medium w3-hide-small"><a class="w3-hover-white w3-padding-16"
+                                                        href="http://localhost:8080/fileChangeListForm"
+                                                        onclick="w3_show_nav('menuRef')">FILE CHANGE LIST</a></li>
+        </ul>
+    </div>
+</div>
+<div style="align:center; top-margin:40px;padding: 20px 20px 20px 20px">
+    <div bgcolor="white" width="90%" style="position: relative;" align="center">
+        <h2>Upload the Jira input file</h2>
+        <form method="post" action="upload">
+            <table style="width: 80%; height: 25%; text-align: center; margin-left: auto; margin-right: auto;">
+                <tbody>
+                <tr>
+                    <td align="center"><textarea type="text" id="inputXML" name="inputXML" cols="80" rows="8"></textarea></td>
+                </tr>
+                <tr><td><br/></td></tr>
+                <tr>
+                    <td align="center"><input type="submit"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div th:if="${message}">
+        <h2 th:text="${message}"/>
+    </div>
+</div>
+</body>
+</html>
